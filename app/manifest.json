@@ -8,8 +8,23 @@
         "default_popup": "popup.html",
         "default_title": "Параметры ФвФ"
     },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.fanfiction.net/*"
+            ],
+            "js": [
+                "scripts/utils.js"
+            ]
+        },
+        {
+            "matches": ["https://www.fanfiction.net/*"],
+            "js": ["scripts/fanfiction.js"]
+        }
+    ],
 
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "webNavigation"
     ]
 }
