@@ -1,0 +1,84 @@
+.control_plate {
+    float: right;
+}
+
+.status_plate {
+    padding: 3px 2px 3px 2px;
+    margin-right: 4px;
+    border-radius: 2px;
+    color: #444;
+}
+
+.status_plate.download {
+    background-color: #EFEFDB;
+}
+
+.status_plate.read {
+    background-color: #E8F2DC;
+}
+.status_plate.read::after{
+    content: 'Прочитано';
+}
+
+.status_plate.subscribed {
+    background-color: #f2e8c9;
+}
+.status_plate.subscribed::after{
+    content: 'Подписка';
+}
+
+.status_plate.recommended {
+    background-color: #B58290;
+}
+.status_plate.recommended::after{
+    content: 'Рекомендовано';
+}
+
+.status_plate.downloaded {
+    background-color: #FFE076;
+}
+.status_plate.downloaded::after{
+    content: 'Скачано';
+}
+
+.status_plate.dont_read {
+    background-color: #F0BCBA;
+}
+.status_plate.dont_read::after{
+    content: 'Не читать';
+}
+
+.status_plate.to_read {
+    background-color: #E4EBF1;
+}
+.status_plate.to_read::after{
+    content: "Прочитать позже";
+}
+
+.status_plate.wait {
+    background-color: #FAEAD8;
+}
+.status_plate.wait::after{
+    content: 'Жду окончания';
+}
+
+.status_plate.dislike {
+    background-color: #EDE5F0;
+}
+.status_plate.dislike::after{
+    content: 'Не понравилось';
+}
+
+.status_plate.note {
+    background-color: #CCFFCC;
+}
+.status_plate.note::after{
+    content: 'Заметка';
+}
+
+.status_plate.collection {
+    background-color: #bdbdf2;
+}
+.status_plate.collection::after{
+    content: 'В коллекции';
+}

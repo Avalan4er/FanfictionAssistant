@@ -15,6 +15,9 @@
             ],
             "js": [
                 "scripts/utils.js"
+            ],
+            "css": [
+                "css/plates.css"
             ]
         },
         {
@@ -22,9 +25,16 @@
             "js": ["scripts/fanfiction.js"]
         }
     ],
+    "background": {
+        "scripts": [
+            "scripts/storage.js"
+        ],
+        "persistent": false
+    },
 
     "permissions": [
         "activeTab",
-        "webNavigation"
+        "webNavigation",
+        "storage"
     ]
 }
