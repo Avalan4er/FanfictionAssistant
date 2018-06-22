@@ -14,25 +14,26 @@ const sites = {
 
 /**
  * Создает панель управления метками
- * @param {Object} fanficInfo  Информация о фанфике
+ * @param {FanficDetails} fanficDetails  Информация о фанфике
  * @returns {Node} HTML элемент панели управления метками
  */
-function createControlPlate(id = -1, siteId = -1, siteFanficId = '', marks = []) {
+function createControlPlate(fanficDetails) {
     var controlPlate = document.createElement('span')
     controlPlate.setAttribute('class', 'control_plate')
 
-    if (marks != null) {
-        for (var mark in marks) {
+    if (fanficDetails.marks != null) {
+        for (var index in fanficDetails.marks) {
+            var mark = fanficDetails.marks[index]
             var markPlate = createMarkPlate(mark)
             controlPlate.appendChild(markPlate)
         }    
     }
 
     var link = ''
-    if (id != -1) {
-        link = getDownloadLinkByFtfId(id)
-    } else if (siteId != -1 && siteFanficId != '') {
-        link = getDownloadLinkBySiteId(siteId, siteFanficId)
+    if (fanficDetails.id != -1) {
+        link = getDownloadLinkByFtfId(fanficDetails.id)
+    } else if (fanficDetails.siteId != -1 && fanficDetails.siteFanficId != '') {
+        link = getDownloadLinkBySiteId(fanficDetails.siteId, fanficDetails.siteFanficId)
     }
 
     var linkPlate = createDownloadPlate(link)
@@ -62,7 +63,7 @@ function createDownloadPlate(link) {
     linkPlate.setAttribute('class', 'plate download')
 
     var linkHref = document.createElement("a");
-    linkHref.setAttribute('href', 'http://fanfics.me/fictofile?url='+link)
+    linkHref.setAttribute('href', link)
     linkHref.setAttribute('target', '_blank')
     var hrefText = document.createTextNode('Скачать')
     linkHref.appendChild(hrefText)

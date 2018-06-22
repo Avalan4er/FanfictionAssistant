@@ -10,13 +10,23 @@ chrome.storage.local.get(['fanfics'], function(result) {
         var title = titles[id]
         var fanficLink = title.querySelector('.stitle').getAttribute('href')
         var siteFanficId = getSiteFanficId(fanficLink)
-        var fanficInfo = repository.getById(5, 'fanficLink')
-        var controlPlate = createControlPlate(fanficInfo.Id, fanficInfo.siteId, fanficInfo.siteFanficId, fanficInfo.marks)
+        var fanficInfo = repository.findBySiteFanficId(5, siteFanficId)
+        var controlPlate = createControlPlate(fanficInfo)
         title.insertBefore(controlPlate, title.lastChild)
     }
 })
 
 
+/**
+ * Получает идентификатор фанфика из ссылки на фанфик
+ * @param {String} fanficLink Ссылка на фанфик
+ * @returns {String} Идентификатор фанфика
+ */
 function getSiteFanficId(fanficLink) {
-    return fanficLink.split('([0-9]{2,})')
+    var matches = fanficLink.match('([0-9]{2,})')
+    if (matches == null || matches.length < 1) {
+        return ''
+    }
+
+    return matches[0]
 }
