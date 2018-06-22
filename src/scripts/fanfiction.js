@@ -1,7 +1,10 @@
+import {FanficRepository} from 'fanficRepository'
+import {createControlPlate} from 'utils'
+
 var titles = document.querySelectorAll('.z-list')
 chrome.storage.local.get(['fanfics'], function(result) {
     if (result.fanfics == undefined) {
-        console.error("Ошибка - нет загруженых фанфиков")
+        console.error('Ошибка - нет загруженых фанфиков')
         return
     }
 

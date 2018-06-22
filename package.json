@@ -1,0 +1,23 @@
+{
+  "name": "fanfictionassistant",
+  "version": "0.0.1",
+  "description": "Ассистент Фанфик в Файл",
+  "main": "manifest.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avalan4er/FanfictionAssistant.git"
+  },
+  "keywords": [
+    "fanfiction",
+    "fanfic"
+  ],
+  "author": "avalan4er",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Avalan4er/FanfictionAssistant/issues"
+  },
+  "homepage": "https://github.com/Avalan4er/FanfictionAssistant#readme"
+}

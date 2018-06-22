@@ -10,14 +10,14 @@ const sites = {
     8:  { url:'https://litnet.com', format:'' },
     9:  { url:'https://ranobelib.ru', format:'' },
     10: { url:'https://author.today', format:'' }
-};
+}
 
 /**
  * Создает панель управления метками
  * @param {FanficDetails} fanficDetails  Информация о фанфике
  * @returns {Node} HTML элемент панели управления метками
  */
-function createControlPlate(fanficDetails) {
+export function createControlPlate(fanficDetails) {
     var controlPlate = document.createElement('span')
     controlPlate.setAttribute('class', 'control_plate')
 
@@ -62,7 +62,7 @@ function createDownloadPlate(link) {
     var linkPlate = document.createElement('span')
     linkPlate.setAttribute('class', 'plate download')
 
-    var linkHref = document.createElement("a");
+    var linkHref = document.createElement('a')
     linkHref.setAttribute('href', link)
     linkHref.setAttribute('target', '_blank')
     var hrefText = document.createTextNode('Скачать')
@@ -79,7 +79,7 @@ function createDownloadPlate(link) {
  * @returns {String} Ссылка на фанфик в ФвФ
  */
 function getDownloadLinkByFtfId(id = -1) {
-    if (id == -1) return '';
+    if (id == -1) return ''
 
     return 'http://fanfics.me/ftf' + id
 }
@@ -91,8 +91,8 @@ function getDownloadLinkByFtfId(id = -1) {
  * @returns {String} Ссылка на фанфик в ФвФ
  */
 function getDownloadLinkBySiteId(siteId = -1, siteFanficId = '') {
-    if (siteId == -1) return '';
-    if (siteFanficId == '') return '';
+    if (siteId == -1) return ''
+    if (siteFanficId == '') return ''
 
     var site = sites[siteId]
     return 'http://fanfics.me/fictofile?url=' + site.url + site.format.replace('{id}', siteFanficId)

@@ -1,7 +1,7 @@
 /**
  * Репозиторий фанфиков
  */
-class FanficRepository {
+export class FanficRepository {
     /**
      * 
      * @param {Object} fanfics Словарь фанфиков в виде id : {default_id, site_id, mark}
@@ -20,8 +20,8 @@ class FanficRepository {
     findBySiteFanficId(siteId = -1, siteFanficId = '') {
         var defaultFanfic = new FanficDetails(-1, siteId, siteFanficId, [])
         
-        if (siteFanficId == '') return defaultFanfic;
-        if (siteId == -1) return defaultFanfic;
+        if (siteFanficId == '') return defaultFanfic
+        if (siteId == -1) return defaultFanfic
 
 
         for (var id in this.fanfics) {
@@ -38,7 +38,7 @@ class FanficRepository {
 /**
  * Информация о фанфике
  */
-class FanficDetails {
+export class FanficDetails {
     /**
      * Конструктор 
      * @param {Number} id Идентификатор фанфика в системе ФвФ
