@@ -13,7 +13,7 @@ function createLinkPlate(link) {
     return fvfSpanNode
 }
 
-function createStatusPlate(link, parentNode) {
+function createStatusPlates(link, parentNode) {
     var statuses = chrome.storage.local.get(['fanfics'], function(result){
         result.fanfics.forEach(fanfic => {
             if (fanfic.link == link) {
@@ -34,7 +34,7 @@ function createControlPlate(link) {
     var linkPlate = createLinkPlate(link)
     controlPlate.appendChild(linkPlate)
 
-    createStatusPlate(link, controlPlate)
+    createStatusPlates(link, controlPlate)
 
     return controlPlate
 }
