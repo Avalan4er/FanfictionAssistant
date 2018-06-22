@@ -6,5 +6,7 @@
             ],
             "url": "http://json.schemastore.org/chrome-manifest"
         }
-    ]
+    ],
+    "eslint.enable": true,
+    "eslint.provideLintTask": true
 }

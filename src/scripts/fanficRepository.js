@@ -1,7 +1,7 @@
 /**
  * Репозиторий фанфиков
  */
-export class FanficRepository {
+class FanficRepository {
     /**
      * 
      * @param {Object} fanfics Словарь фанфиков в виде id : {default_id, site_id, mark}
@@ -12,7 +12,7 @@ export class FanficRepository {
     }
 
     /**
-     * Ищет в списке фанфиков подходящий по идентификатору
+     * Ищет в списке фанфиков п одходящий по идентификатору
      * @param {Number} siteId Идентификатор сайта
      * @param {String} siteFanficId Идентификатор фанфика на сайте
      * @returns {FanficDetails} Информация о фанфике
@@ -38,7 +38,7 @@ export class FanficRepository {
 /**
  * Информация о фанфике
  */
-export class FanficDetails {
+class FanficDetails {
     /**
      * Конструктор 
      * @param {Number} id Идентификатор фанфика в системе ФвФ

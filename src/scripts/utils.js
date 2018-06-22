@@ -17,18 +17,11 @@ const sites = {
  * @param {FanficDetails} fanficDetails  Информация о фанфике
  * @returns {Node} HTML элемент панели управления метками
  */
-export function createControlPlate(fanficDetails) {
+function createControlPlate(fanficDetails) {
     var controlPlate = document.createElement('span')
     controlPlate.setAttribute('class', 'control_plate')
 
-    if (fanficDetails.marks != null) {
-        for (var index in fanficDetails.marks) {
-            var mark = fanficDetails.marks[index]
-            var markPlate = createMarkPlate(mark)
-            controlPlate.appendChild(markPlate)
-        }    
-    }
-
+    // Скачать
     var link = ''
     if (fanficDetails.id != -1) {
         link = getDownloadLinkByFtfId(fanficDetails.id)
@@ -39,6 +32,19 @@ export function createControlPlate(fanficDetails) {
     var linkPlate = createDownloadPlate(link)
     controlPlate.appendChild(linkPlate)
 
+    // Список меток
+    if (fanficDetails.marks != null) {
+        var marksList = document.createElement('ul')
+        marksList.setAttribute('class', 'marks')
+        controlPlate.appendChild(marksList)
+
+        for (var index in fanficDetails.marks) {
+            var mark = fanficDetails.marks[index]
+            var markPlate = createMarkPlate(mark)
+            marksList.appendChild(markPlate)
+        }    
+    }
+
     return controlPlate
 }
 
@@ -48,7 +54,7 @@ export function createControlPlate(fanficDetails) {
  * @returns {Node} HTML элемент метки фанфика
  */
 function createMarkPlate(markId) {
-    var markPlate = document.createElement('span')
+    var markPlate = document.createElement('li')
     markPlate.setAttribute('class', 'plate type' + markId)
     return markPlate
 }
@@ -59,7 +65,7 @@ function createMarkPlate(markId) {
  * @returns {Node} HTML элемент Скачать фанфик
  */
 function createDownloadPlate(link) {
-    var linkPlate = document.createElement('span')
+    var linkPlate = document.createElement('div')
     linkPlate.setAttribute('class', 'plate download')
 
     var linkHref = document.createElement('a')

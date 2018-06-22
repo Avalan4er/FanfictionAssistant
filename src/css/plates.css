@@ -1,5 +1,14 @@
 .control_plate {
     float: right;
+    width: 110px;
+    overflow: auto;
+}
+
+.marks {
+    list-style: none;
+    list-style-type: none;
+    margin: 0px;
+    width: 100%;
 }
 
 .plate {
