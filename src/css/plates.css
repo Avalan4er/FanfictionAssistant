@@ -2,83 +2,90 @@
     float: right;
 }
 
-.status_plate {
+.plate {
     padding: 3px 2px 3px 2px;
     margin-right: 4px;
     border-radius: 2px;
     color: #444;
 }
 
-.status_plate.download {
+.plate.download {
     background-color: #EFEFDB;
 }
 
-.status_plate.read {
-    background-color: #E8F2DC;
-}
-.status_plate.read::after{
-    content: 'Прочитано';
-}
-
-.status_plate.subscribed {
+.plate.type1 {
     background-color: #f2e8c9;
 }
-.status_plate.subscribed::after{
+.plate.type1::after{
     content: 'Подписка';
 }
 
-.status_plate.recommended {
+.plate.type2 {
     background-color: #B58290;
 }
-.status_plate.recommended::after{
+.plate.type2::after{
     content: 'Рекомендовано';
 }
 
-.status_plate.downloaded {
-    background-color: #FFE076;
+.plate.type3 {
+    background-color: #E8F2DC;
 }
-.status_plate.downloaded::after{
-    content: 'Скачано';
+.plate.type3::after{
+    content: 'Прочитано';
 }
 
-.status_plate.dont_read {
+.plate.type4 {
     background-color: #F0BCBA;
 }
-.status_plate.dont_read::after{
+.plate.type4::after{
     content: 'Не читать';
 }
 
-.status_plate.to_read {
+.plate.type5 {
     background-color: #E4EBF1;
 }
-.status_plate.to_read::after{
+.plate.type5::after{
     content: "Прочитать позже";
 }
 
-.status_plate.wait {
+.plate.type6 {
     background-color: #FAEAD8;
 }
-.status_plate.wait::after{
+.plate.type6::after{
     content: 'Жду окончания';
 }
 
-.status_plate.dislike {
+.plate.type7 {
+    background-color: #cee381;
+}
+.plate.type7::after{
+    content: 'Понравилось';
+}
+
+.plate.type8 {
     background-color: #EDE5F0;
 }
-.status_plate.dislike::after{
+.plate.type8::after{
     content: 'Не понравилось';
 }
 
-.status_plate.note {
+.plate.type9 {
+    background-color: #FFE076;
+}
+.plate.type9::after{
+    content: 'Скачано';
+}
+
+.plate.typea {
     background-color: #CCFFCC;
 }
-.status_plate.note::after{
+.plate.typea::after{
     content: 'Заметка';
 }
 
-.status_plate.collection {
+.plate.typeb {
     background-color: #bdbdf2;
 }
-.status_plate.collection::after{
+.plate.typeb::after{
     content: 'В коллекции';
 }

@@ -14,7 +14,8 @@
                 "https://www.fanfiction.net/*"
             ],
             "js": [
-                "scripts/utils.js"
+                "scripts/utils.js",
+                "scripts/fanficRepository.js"
             ],
             "css": [
                 "css/plates.css"
