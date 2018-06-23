@@ -12,14 +12,20 @@ const sites = {
     10: { url:'https://author.today', format:'' }
 }
 
+const marks = ['1', /*'2',*/ '3', '4', '5', '6', '7', '8', /*'9', 'a', 'b'*/]
+
 /**
  * Создает панель управления метками
  * @param {FanficDetails} fanficDetails  Информация о фанфике
  * @returns {Node} HTML элемент панели управления метками
  */
 function createControlPlate(fanficDetails) {
+    let controlPlateContainer = document.createElement('span')
+    controlPlateContainer.setAttribute('class', 'control_panel_container')
+
     let controlPlate = document.createElement('span')
-    controlPlate.setAttribute('class', 'control_plate')
+    controlPlate.setAttribute('class', 'control_panel')
+    controlPlateContainer.appendChild(controlPlate)
 
     // Скачать
     let link = ''
@@ -29,33 +35,33 @@ function createControlPlate(fanficDetails) {
         link = getDownloadLinkBySiteId(fanficDetails.siteId, fanficDetails.siteFanficId)
     }
 
+    // Кнопка Добавить в...
     let linkPlate = createDownloadPlate(link)
     controlPlate.appendChild(linkPlate)
 
     // Список меток
-    if (fanficDetails.marks != null) {
-        let marksList = document.createElement('ul')
-        marksList.setAttribute('class', 'marks')
-        controlPlate.appendChild(marksList)
+    let marksList = document.createElement('ul')
+    marksList.setAttribute('class', 'marks')
+    controlPlate.appendChild(marksList)
 
-        for (let index in fanficDetails.marks) {
-            let mark = fanficDetails.marks[index]
-            let markPlate = createMarkPlate(mark)
-            marksList.appendChild(markPlate)
-        }    
-    }
+    // Добавляем метки в список
+    marks.forEach(mark => {
+        let markPlate = createMarkPlate(mark, fanficDetails.marks.includes(mark))
+        marksList.appendChild(markPlate)
+    })
 
-    return controlPlate
+    return controlPlateContainer
 }
 
 /**
  * Создает HTML элемент отметки
  * @param {Number} markId идентификатор отметки
+ * @param {Boolean} selected выбрана ли метка
  * @returns {Node} HTML элемент метки фанфика
  */
-function createMarkPlate(markId) {
+function createMarkPlate(markId, selected) {
     let markPlate = document.createElement('li')
-    markPlate.setAttribute('class', 'plate type' + markId)
+    markPlate.setAttribute('class', 'plate type' + markId + (selected ? ' selected' : ''))
     return markPlate
 }
 
@@ -71,7 +77,7 @@ function createDownloadPlate(link) {
     let linkHref = document.createElement('a')
     linkHref.setAttribute('href', link)
     linkHref.setAttribute('target', '_blank')
-    let hrefText = document.createTextNode('Скачать')
+    let hrefText = document.createTextNode('Добавить в...')
     linkHref.appendChild(hrefText)
 
     linkPlate.appendChild(linkHref)

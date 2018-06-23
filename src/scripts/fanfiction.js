@@ -8,10 +8,15 @@ chrome.storage.local.get(['fanficsCache'], function(result) {
     let repository = new FanficRepository(result.fanficsCache.data)
     for (let id in titles) {
         let title = titles[id]
+        if (!(title instanceof Node)) {
+            continue
+        }
+
         let fanficLink = title.querySelector('.stitle').getAttribute('href')
         let siteFanficId = getSiteFanficId(fanficLink)
         let fanficInfo = repository.findBySiteFanficId(5, siteFanficId)
         let controlPlate = createControlPlate(fanficInfo)
+        controlPlate.setAttribute('style', 'height: ' + title.clientHeight + 'px')
         title.insertBefore(controlPlate, title.lastChild)
     }
 })
