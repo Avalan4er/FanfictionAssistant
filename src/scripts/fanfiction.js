@@ -1,17 +1,17 @@
-var titles = document.querySelectorAll('.z-list')
-chrome.storage.local.get(['fanfics'], function(result) {
-    if (result.fanfics == undefined) {
+let titles = document.querySelectorAll('.z-list')
+chrome.storage.local.get(['fanficsCache'], function(result) {
+    if (result.fanficsCache == undefined) {
         console.error('Ошибка - нет загруженых фанфиков')
         return
     }
 
-    var repository = new FanficRepository(result.fanfics)
-    for (var id in titles) {
-        var title = titles[id]
-        var fanficLink = title.querySelector('.stitle').getAttribute('href')
-        var siteFanficId = getSiteFanficId(fanficLink)
-        var fanficInfo = repository.findBySiteFanficId(5, siteFanficId)
-        var controlPlate = createControlPlate(fanficInfo)
+    let repository = new FanficRepository(result.fanficsCache.data)
+    for (let id in titles) {
+        let title = titles[id]
+        let fanficLink = title.querySelector('.stitle').getAttribute('href')
+        let siteFanficId = getSiteFanficId(fanficLink)
+        let fanficInfo = repository.findBySiteFanficId(5, siteFanficId)
+        let controlPlate = createControlPlate(fanficInfo)
         title.insertBefore(controlPlate, title.lastChild)
     }
 })
@@ -23,7 +23,7 @@ chrome.storage.local.get(['fanfics'], function(result) {
  * @returns {String} Идентификатор фанфика
  */
 function getSiteFanficId(fanficLink) {
-    var matches = fanficLink.match('([0-9]{2,})')
+    let matches = fanficLink.match('([0-9]{2,})')
     if (matches == null || matches.length < 1) {
         return ''
     }

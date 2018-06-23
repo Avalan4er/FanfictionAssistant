@@ -18,14 +18,14 @@ class FanficRepository {
      * @returns {FanficDetails} Информация о фанфике
      */
     findBySiteFanficId(siteId = -1, siteFanficId = '') {
-        var defaultFanfic = new FanficDetails(-1, siteId, siteFanficId, [])
+        let defaultFanfic = new FanficDetails(-1, siteId, siteFanficId, [])
         
         if (siteFanficId == '') return defaultFanfic
         if (siteId == -1) return defaultFanfic
 
 
-        for (var id in this.fanfics) {
-            var fanfic = this.fanfics[id]
+        for (let id in this.fanfics) {
+            let fanfic = this.fanfics[id]
             if (fanfic.site_id == siteId && fanfic.default_id == siteFanficId) {
                 return new FanficDetails(id, siteId, siteFanficId, fanfic.mark.split(','))
             }

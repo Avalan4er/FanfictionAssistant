@@ -18,29 +18,29 @@ const sites = {
  * @returns {Node} HTML элемент панели управления метками
  */
 function createControlPlate(fanficDetails) {
-    var controlPlate = document.createElement('span')
+    let controlPlate = document.createElement('span')
     controlPlate.setAttribute('class', 'control_plate')
 
     // Скачать
-    var link = ''
+    let link = ''
     if (fanficDetails.id != -1) {
         link = getDownloadLinkByFtfId(fanficDetails.id)
     } else if (fanficDetails.siteId != -1 && fanficDetails.siteFanficId != '') {
         link = getDownloadLinkBySiteId(fanficDetails.siteId, fanficDetails.siteFanficId)
     }
 
-    var linkPlate = createDownloadPlate(link)
+    let linkPlate = createDownloadPlate(link)
     controlPlate.appendChild(linkPlate)
 
     // Список меток
     if (fanficDetails.marks != null) {
-        var marksList = document.createElement('ul')
+        let marksList = document.createElement('ul')
         marksList.setAttribute('class', 'marks')
         controlPlate.appendChild(marksList)
 
-        for (var index in fanficDetails.marks) {
-            var mark = fanficDetails.marks[index]
-            var markPlate = createMarkPlate(mark)
+        for (let index in fanficDetails.marks) {
+            let mark = fanficDetails.marks[index]
+            let markPlate = createMarkPlate(mark)
             marksList.appendChild(markPlate)
         }    
     }
@@ -54,7 +54,7 @@ function createControlPlate(fanficDetails) {
  * @returns {Node} HTML элемент метки фанфика
  */
 function createMarkPlate(markId) {
-    var markPlate = document.createElement('li')
+    let markPlate = document.createElement('li')
     markPlate.setAttribute('class', 'plate type' + markId)
     return markPlate
 }
@@ -65,13 +65,13 @@ function createMarkPlate(markId) {
  * @returns {Node} HTML элемент Скачать фанфик
  */
 function createDownloadPlate(link) {
-    var linkPlate = document.createElement('div')
+    let linkPlate = document.createElement('div')
     linkPlate.setAttribute('class', 'plate download')
 
-    var linkHref = document.createElement('a')
+    let linkHref = document.createElement('a')
     linkHref.setAttribute('href', link)
     linkHref.setAttribute('target', '_blank')
-    var hrefText = document.createTextNode('Скачать')
+    let hrefText = document.createTextNode('Скачать')
     linkHref.appendChild(hrefText)
 
     linkPlate.appendChild(linkHref)
@@ -100,6 +100,6 @@ function getDownloadLinkBySiteId(siteId = -1, siteFanficId = '') {
     if (siteId == -1) return ''
     if (siteFanficId == '') return ''
 
-    var site = sites[siteId]
+    let site = sites[siteId]
     return 'http://fanfics.me/fictofile?url=' + site.url + site.format.replace('{id}', siteFanficId)
 }
