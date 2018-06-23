@@ -19,7 +19,47 @@ chrome.storage.local.get(['fanficsCache'], function(result) {
         controlPlate.setAttribute('style', 'height: ' + title.clientHeight + 'px')
         title.insertBefore(controlPlate, title.lastChild)
     }
+
+    $('.control_panel').on('click', '.plate.download', function() {
+        $(this).children()[0].click()       
+    })
+
+    $('.marks').on('click', '.plate', function() {
+        let plate = $(this)
+        let parent = plate.closest('.control_panel')
+        let fanficId = parent.attr('data-fanfic-id')
+        let siteFanficId = parent.attr('data-site-fanfic-id')
+        if (fanficId === undefined || fanficId == '') {
+            console.log('Не найден идентификатор фанфика')
+            return
+        }
+        
+        let markId = this.id
+        let isSelected = plate.hasClass('selected')
+
+        chrome.runtime.sendMessage({
+            fanficId: fanficId,
+            selected: isSelected,
+            siteId: 5,
+            siteFanficId: siteFanficId,
+            mark: markId
+        }, function(response) {
+            if (response.status == 'success')
+            {
+                if (isSelected) {
+                    plate.removeClass('selected')
+                } else {
+                    plate.addClass('selected')
+                }
+            }
+            if (response.status == 'no_fic') {
+                parent.children()[0].click()  
+            }
+        })
+    })
 })
+
+
 
 
 /**

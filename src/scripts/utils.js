@@ -23,9 +23,11 @@ function createControlPlate(fanficDetails) {
     let controlPlateContainer = document.createElement('span')
     controlPlateContainer.setAttribute('class', 'control_panel_container')
 
-    let controlPlate = document.createElement('span')
-    controlPlate.setAttribute('class', 'control_panel')
-    controlPlateContainer.appendChild(controlPlate)
+    let controlPanel = document.createElement('span')
+    controlPanel.setAttribute('class', 'control_panel')
+    controlPanel.setAttribute('data-fanfic-id', fanficDetails.id!=-1?fanficDetails.id:'no_id')
+    controlPanel.setAttribute('data-site-fanfic-id', fanficDetails.siteFanficId)
+    controlPlateContainer.appendChild(controlPanel)
 
     // Скачать
     let link = ''
@@ -37,12 +39,12 @@ function createControlPlate(fanficDetails) {
 
     // Кнопка Добавить в...
     let linkPlate = createDownloadPlate(link)
-    controlPlate.appendChild(linkPlate)
+    controlPanel.appendChild(linkPlate)
 
     // Список меток
     let marksList = document.createElement('ul')
     marksList.setAttribute('class', 'marks')
-    controlPlate.appendChild(marksList)
+    controlPanel.appendChild(marksList)
 
     // Добавляем метки в список
     marks.forEach(mark => {
@@ -62,6 +64,7 @@ function createControlPlate(fanficDetails) {
 function createMarkPlate(markId, selected) {
     let markPlate = document.createElement('li')
     markPlate.setAttribute('class', 'plate type' + markId + (selected ? ' selected' : ''))
+    markPlate.setAttribute('id', markId)
     return markPlate
 }
 
@@ -75,12 +78,13 @@ function createDownloadPlate(link) {
     linkPlate.setAttribute('class', 'plate download')
 
     let linkHref = document.createElement('a')
-    linkHref.setAttribute('href', link)
-    linkHref.setAttribute('target', '_blank')
-    let hrefText = document.createTextNode('Добавить в...')
-    linkHref.appendChild(hrefText)
-
     linkPlate.appendChild(linkHref)
+    linkHref.setAttribute('href', link)
+    linkHref.setAttribute('style', 'display: none;')
+    linkHref.setAttribute('target', '_blank')
+
+    let hrefText = document.createTextNode('Добавить в...')
+    linkPlate.appendChild(hrefText)
 
     return linkPlate
 }

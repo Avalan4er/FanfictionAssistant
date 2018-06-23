@@ -18,13 +18,17 @@
         },
         {
             "matches": ["https://www.fanfiction.net/*"],
-            "js": ["scripts/fanfiction.js"]
+            "js": [
+                "scripts/fanfiction.js",
+                "vendor/jquery-3.3.1.min.js"
+            ]
         }
     ],
     "background": {
         "scripts": [
             "vendor/jquery-3.3.1.min.js",
-            "scripts/storage.js",
+            "scripts/backgroundStorage.js",
+            "scripts/backgroundMarks.js",
             "scripts/fanficsApi.js"
         ],
         "persistent": false
