@@ -4,8 +4,15 @@ chrome.storage.local.get(['fanficsCache'], function(result) {
         return
     }
     let repository = new FanficRepository(result.fanficsCache.data)
-    
-    // Инъекция в страницу поиска фанфиков
+    repository.clearAllExeptForSite(1)
+
+    injectToSearch(repository)
+    injectToFanficPage(repository)
+
+    attachEventListeners()
+})
+
+function injectToSearch(repository) {
     let articles = document.querySelectorAll('article.block')
     for (let id in articles) {
         let article = articles[id]
@@ -38,20 +45,25 @@ chrome.storage.local.get(['fanficsCache'], function(result) {
         controlPanel.setAttribute('style', 'height: ' + height + 'px; margin: 35px -10px 0px 5px;')
         controlPanelCell.appendChild(controlPanel)
     }
+}
 
-    // Инъекция в страницу чтения фанфика
-    /*let profile_top = document.getElementById('profile_top')
-    if (profile_top != null && profile_top instanceof Node) {
-        let fanficLink = window.location.href
-        let siteFanficId = parseSiteFanficId(fanficLink)
-        let fanficInfo = repository.findBySiteFanficId(5, siteFanficId)
-        let controlPlate = createControlPlate(fanficInfo)
-        controlPlate.setAttribute('style', 'height: ' + profile_top.clientHeight + 'px')
-        profile_top.insertBefore(controlPlate, profile_top.firstChild)
-    }*/
+function injectToFanficPage(repository) {
+    let fanficLink = window.location.href
+    if (!fanficLink.includes('readfic')) {
+        return
+    }
 
-    attachEventListeners()
-})
+    let profile_top = document.querySelector('div.description')
+    if (profile_top == null || !(profile_top instanceof Node)) {
+        return
+    }
+
+    let siteFanficId = parseSiteFanficId(fanficLink)
+    let fanficInfo = repository.findBySiteFanficId(5, siteFanficId)
+    let controlPlate = createControlPlate(fanficInfo)
+    controlPlate.setAttribute('style', 'height: ' + profile_top.clientHeight + 'px')
+    profile_top.appendChild(controlPlate)
+}
 
 /**
  * Получает идентификатор фанфика из ссылки на фанфик
