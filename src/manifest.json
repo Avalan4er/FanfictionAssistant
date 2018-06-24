@@ -27,9 +27,10 @@
     "background": {
         "scripts": [
             "vendor/jquery-3.3.1.min.js",
+            "scripts/fanficsApi.js",
+            "scripts/fanficRepository.js",
             "scripts/backgroundStorage.js",
-            "scripts/backgroundMarks.js",
-            "scripts/fanficsApi.js"
+            "scripts/backgroundMarks.js"
         ],
         "persistent": false
     },

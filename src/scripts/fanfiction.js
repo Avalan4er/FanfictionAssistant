@@ -39,7 +39,7 @@ chrome.storage.local.get(['fanficsCache'], function(result) {
 
         chrome.runtime.sendMessage({
             fanficId: fanficId,
-            selected: isSelected,
+            action: isSelected ? 'remove' : 'add',
             siteId: 5,
             siteFanficId: siteFanficId,
             mark: markId

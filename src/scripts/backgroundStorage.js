@@ -15,6 +15,37 @@ function periodicalyRunUpdate(interval) {
 }
 
 /**
+ * Обновляет метку в хранилище
+ * @param {Number} fanficId Идентификатор фанфика
+ * @param {Number} siteId Идентификатор сайта
+ * @param {String} siteFanficId Идентификатор фанфика на сайте
+ * @param {String} mark Метка
+ * @param {String} action Действие над меткой (add, remove)
+ */
+function updateFanficMark(fanficId, siteId, siteFanficId, mark, action) {
+    chrome.storage.local.get([cacheStorageKey], function(result) {
+        if(chrome.runtime.lastError)
+        {
+            /* error */
+            console.log('Кэш еще не создан. Создаю новый кэш.')
+            refreshCache()
+            return
+        }
+
+        let cache = result[cacheStorageKey]
+        let repository = new FanficRepository(cache.data)
+        repository.updateFanficMark(action, fanficId, siteId, siteFanficId, mark)
+        cache.data = repository.fanfics
+
+        let dto = {}
+        dto[cacheStorageKey] = cache
+        chrome.storage.local.set(dto, function() {
+            console.log('Метка ' + mark + ' фанфика ' + fanficId + ' успешно ' + (action=='add'?'добавлена в хранилище':'удалена из хранилища'))
+        })
+    })
+}
+
+/**
  * Проверяет нужно ли обновлять кэш и обновляет если нужно
  */
 function updateStorage() {

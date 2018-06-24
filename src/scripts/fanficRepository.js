@@ -33,6 +33,40 @@ class FanficRepository {
 
         return defaultFanfic
     }
+
+    /**
+     * Обновляет метку в репозитории
+     * @param {Number} fanficId Идентификатор фанфика
+     * @param {Number} siteId Идентификатор сайта
+     * @param {String} siteFanficId Идентификатор фанфика на сайте
+     * @param {String} mark Метка
+     * @param {String} action Действие над меткой (add, remove)
+     */
+    updateFanficMark(action, fanficId, siteId, siteFanficId, mark) {
+        let fanfic = this.fanfics[fanficId]
+        if (fanfic == null) {
+            this.fanfics[fanficId] = {
+                site_id: siteId,
+                default_id: siteFanficId,
+                mark: mark
+            }
+        } else {
+            let marks = Object.values(fanfic.mark.split(','))
+            if (action == 'add') {
+                if (!marks.includes(mark)) {
+                    marks.push(mark)
+                }
+            } else {
+                var idx = marks.indexOf(mark)
+                if (idx > -1) {
+                    marks.splice(idx, 1)
+                }
+            }
+            fanfic.mark = marks.join(',')
+            this.fanfics[fanficId] = fanfic
+        }
+        
+    }
 }
 
 /**

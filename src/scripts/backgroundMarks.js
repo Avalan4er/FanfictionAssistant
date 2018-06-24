@@ -6,10 +6,12 @@ chrome.runtime.onMessage.addListener(
 
         console.log('Принято сообщение от контент скрипта: ' + JSON.stringify(request))
 
+        // Фанфик известен
         if (request.fanficId != 'no_id') {
             console.log('Идентификатор фанфика известен')
-            changeFavoriteMark(request.fanficId, request.mark, request.selected, sendResponse)
-        } else {
+            changeFavoriteMark(request.fanficId, request.mark, request.action, sendResponse)
+            updateFanficMark(request.fanficId, request.siteId, request.siteFanficId, request.mark, request.action)
+        } else { // Id фанфика нужно запросить
             console.log('Идентификатор фанфика неизвестен, запрашиваю идентификатор фанфика')
             getFanficId(request.siteId, request.siteFanficId, function(data) {
                 if (data === undefined) {
@@ -25,7 +27,9 @@ chrome.runtime.onMessage.addListener(
                 }
 
                 console.log('Идентификатор фанфика получен: ' + data.fic_id + '')
-                changeFavoriteMark(data.fic_id, request.mark, request.selected, sendResponse)
+                changeFavoriteMark(data.fic_id, request.mark, request.action, sendResponse)
+                updateFanficMark(data.fic_id, request.siteId, request.siteFanficId, request.mark, request.action)
+
             }, function(error) {
                 sendResponse({status: 'error', message: error})
             })
@@ -36,11 +40,11 @@ chrome.runtime.onMessage.addListener(
         return true
     })
 
-function changeFavoriteMark(fanficId, mark, selected, sendResponse) {
+function changeFavoriteMark(fanficId, mark, action, sendResponse) {
     console.log('Отправляю запрос на смену метки фанфика')
-    if (!selected) {
+    if (action == 'add') {
         addFavoriteMark(fanficId, mark, function() {
-            console.log('Метка ' + mark + ' фанфика ' + fanficId + ' успешно добавлена')
+            console.log('Метка ' + mark + ' фанфика ' + fanficId + ' успешно добавлена в систему ФвФ')
             sendResponse({status: 'success'})
         }, function(message) {
             console.log('Ошибка добавления метки: ' + message !== undefined?message:'')
@@ -48,7 +52,7 @@ function changeFavoriteMark(fanficId, mark, selected, sendResponse) {
         })
     } else {
         deleteFavoriteMark(fanficId, mark, function() {
-            console.log('Метка ' + mark + ' фанфика ' + fanficId + ' успешно удалена')
+            console.log('Метка ' + mark + ' фанфика ' + fanficId + ' успешно удалена из системы ФвФ')
             sendResponse({status: 'success'})
         }, function(message) {
             console.log('Ошибка добавления метки: ' + message !== undefined?message:'')
