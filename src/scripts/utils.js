@@ -15,6 +15,52 @@ const sites = {
 const marks = ['1', /*'2',*/ '3', '4', '5', '6', '7', '8', /*'9', 'a', 'b'*/]
 
 /**
+ * Прикрепляет хэндлеры событий кнопок
+ */
+function attachEventListeners() {
+    $('.control_panel').on('click', '.plate.download', function() {
+        $(this).children()[0].click()       
+    })
+
+    $('.marks').on('click', '.plate', function() {
+        let plate = $(this)
+        let parent = plate.closest('.control_panel')
+        let fanficId = parent.attr('data-fanfic-id')
+        let siteFanficId = parent.attr('data-site-fanfic-id')
+        if (fanficId === undefined || fanficId == '') {
+            console.log('Не найден идентификатор фанфика')
+            return
+        }
+        
+        let markId = this.id
+        let isSelected = plate.hasClass('selected')
+
+        chrome.runtime.sendMessage({
+            fanficId: fanficId,
+            action: isSelected ? 'remove' : 'add',
+            siteId: 5,
+            siteFanficId: siteFanficId,
+            mark: markId
+        }, function(response) {
+            if (response.status == 'success')
+            {
+                // При успешном выполнении запроса мы 100% узнаем ID фанфика в системе ФвФ
+                parent.attr('data-fanfic-id', response.fanficId)
+                
+                if (isSelected) {
+                    plate.removeClass('selected')
+                } else {
+                    plate.addClass('selected')
+                }
+            }
+            if (response.status == 'no_fic') {
+                parent.children()[0].click()  
+            }
+        })
+    })
+}
+
+/**
  * Создает панель управления метками
  * @param {FanficDetails} fanficDetails  Информация о фанфике
  * @returns {Node} HTML элемент панели управления метками
