@@ -1,10 +1,12 @@
+const siteId = 1
+
 chrome.storage.local.get(['fanficsCache'], function(result) {
     if (result.fanficsCache == undefined) {
         console.error('Ошибка - нет загруженых фанфиков')
         return
     }
     let repository = new FanficRepository(result.fanficsCache.data)
-    repository.clearAllExeptForSite(1)
+    repository.clearAllExeptForSite(siteId)
 
     injectToSearch(repository)
     injectToFanficPage(repository)
@@ -14,7 +16,7 @@ function injectToSearch(repository) {
     $('article.block').each(function() {
         let fanficLink = $(this).find('.visit-link').attr('href')
         let siteFanficId = parseSiteFanficId(fanficLink)
-        let fanficInfo = repository.findBySiteFanficId(1, siteFanficId)
+        let fanficInfo = repository.findBySiteFanficId(siteId, siteFanficId)
         let controlPanel = $('<td style="vertical-align: top;"/>').append(
             createControlPlate(fanficInfo)
                 .attr('style', 'margin: 40px -10px 0 5px')
@@ -41,7 +43,7 @@ function injectToFanficPage(repository) {
     }
 
     let siteFanficId = parseSiteFanficId(fanficLink)
-    let fanficInfo = repository.findBySiteFanficId(1, siteFanficId)
+    let fanficInfo = repository.findBySiteFanficId(siteId, siteFanficId)
     let controlPlate = createControlPlate(fanficInfo)
 
     $('div.description').append(controlPlate.attr('style', 'margin: 10px 0 0 -5px'))

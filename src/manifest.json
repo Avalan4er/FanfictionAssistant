@@ -6,8 +6,9 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.fanfiction.net/*",
-                "*://*.ficbook.net/*"
+                "*://*.fanfiction.net/*",
+                "*://*.ficbook.net/*",
+                "*://hogwartsnet.ru/*"
             ],
             "js": [
                 "js/common/utils.js",
@@ -20,14 +21,21 @@
         {
             "matches": ["*://*.fanfiction.net/*"],
             "js": [
-                "js/fanfiction/fanfiction.js",
+                "js/fanfiction/content.js",
                 "js/vendor/jquery-3.3.1.min.js"
             ]
         },
         {
             "matches": ["*://*.ficbook.net/*"],
             "js": [
-                "js/ficbook/ficbook.js",
+                "js/ficbook/content.js",
+                "js/vendor/jquery-3.3.1.min.js"
+            ]
+        },
+        {
+            "matches": ["*://hogwartsnet.ru/*"],
+            "js": [
+                "js/hogwartsnet/content.js",
                 "js/vendor/jquery-3.3.1.min.js"
             ]
         }
@@ -44,10 +52,7 @@
     },
 
     "permissions": [
-        "activeTab",
-        "webNavigation",
         "storage",
-        "cookies",
         "*://*.fanfics.me/"
     ],
     "icons": {

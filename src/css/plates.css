@@ -2,12 +2,15 @@
     width: 135px;
 }
 
+.control_panel:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 0 0 rgba(0,0,0,0);
+}
+
 .control-panel-cell {
     vertical-align: top;
 }
 
 .download {
-    
 }
 
 .list {
@@ -21,6 +24,7 @@
     position: absolute;
     width: inherit;
     z-index: 9999;
+    box-shadow: 0 0 0 rgba(0,0,0,0), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .control_panel:hover .marks-all {

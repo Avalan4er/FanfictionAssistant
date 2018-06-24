@@ -1,7 +1,7 @@
 
 const sites = {
-    1:  { url:'http://ficbook.net', format:'' },
-    2:  { url:'http://hogwartsnet.ru', format:'' },
+    1:  { url:'http://ficbook.net', format:'/readfic/{id}' },
+    2:  { url:'http://hogwartsnet.ru', format:'/mfanf/ffshowfic.php?fid={id}' },
     3:  { url:'http://snapetales.com', format:'' },
     4:  { url:'http://samlib.ru', format:'' },
     5:  { url:'https://www.fanfiction.net', format:'/s/{id}' },
@@ -31,6 +31,7 @@ function createControlPlate(fanficDetails) {
     var controlPlateContainer = $('<div/>', {
         'class': 'control_panel',
         'data-fanfic-id': fanficDetails.id!=-1?fanficDetails.id:'no_id',
+        'data-site-id': fanficDetails.siteId,
         'data-site-fanfic-id': fanficDetails.siteFanficId
     }).append(createDownloadPlate(downloadLink))
 
@@ -58,6 +59,7 @@ function markPlateClick() {
     let plate = $(this)
     let parent = plate.closest('.control_panel')
     let fanficId = parent.attr('data-fanfic-id')
+    let siteId = parent.attr('data-site-id')
     let siteFanficId = parent.attr('data-site-fanfic-id')
     if (fanficId === undefined || fanficId == '') {
         console.log('Не найден идентификатор фанфика')
@@ -70,7 +72,7 @@ function markPlateClick() {
     chrome.runtime.sendMessage({
         fanficId: fanficId,
         action: isSelected ? 'remove' : 'add',
-        siteId: 5,
+        siteId: siteId,
         siteFanficId: siteFanficId,
         mark: markId
     }, function(response) {
