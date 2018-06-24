@@ -12,6 +12,19 @@ class FanficRepository {
     }
 
     /**
+     * Удаляет из репозитория все фанфики, которые не принадлжежат сайту
+     * @param {Number} siteId Идентификатор сайта
+     */
+    clearAllExeptForSite(siteId) {
+        for (let fanficId in this.fanfics) {
+            let fanfic = this.fanfics[fanficId]
+            if (fanfic.site_id != siteId) {
+                delete this.fanfics[fanficId]
+            }
+        }
+    }
+
+    /**
      * Ищет в списке фанфиков п одходящий по идентификатору
      * @param {Number} siteId Идентификатор сайта
      * @param {String} siteFanficId Идентификатор фанфика на сайте
