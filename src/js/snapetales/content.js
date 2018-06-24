@@ -29,7 +29,9 @@ function injectToSearch(repository) {
         let controlPanel = createControlPlate(fanficInfo)
         
         $(this).closest('tr').next().append(
-            $('<td/>').attr('style', 'vertical-align: top;').append(controlPanel)
+            $('<td/>').attr('style', 'vertical-align: middle;').append(
+                controlPanel.attr('style', 'margin: auto;')
+            )
         )
     })
 }
@@ -44,12 +46,13 @@ function injectToFanficPage(repository) {
     let fanficInfo = repository.findBySiteFanficId(siteId, siteFanficId)
     let controlPlate = createControlPlate(fanficInfo).attr('style', 'text-align: left;')
 
-    $('h3').closest('tr').append(
+    let row = $('h3').closest('tr').parent().closest('tr')
+    row.append(
         $('<td/>').attr('style', 'vertical-align:top').append(
-            controlPlate.attr('style', 'float: right;')
+            controlPlate.attr('style', 'float: right; margin: 5px 0 0 0')
         )
     )
-    $(controlPlate).insertAfter('form[name="fidochap"]')
+    row.children().first().attr('colspan', '3')
 }
 
 /**

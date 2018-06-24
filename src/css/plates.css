@@ -10,10 +10,13 @@
     vertical-align: top;
 }
 
-.download {
+.plate.download::after {
+    content: 'Добавить в...';
 }
 
-.list {
+.marks-list {
+    all: initial;
+
     list-style: none;
     margin: 0;
     padding: 0;
@@ -40,6 +43,9 @@
 }
 
 .plate {
+    all: initial;
+
+    display: block;
     padding: 2px 8px 2px 8px;
     border-radius: 2px;
     color: #444;
@@ -53,7 +59,7 @@
 .type1.selected {
     background-color: #f2e8c9;
 }
-.plate.type1::after{
+.type1::after{
     content: 'Подписка';
 }
 

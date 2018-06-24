@@ -9,9 +9,12 @@
                 "*://*.fanfiction.net/*",
                 "*://*.ficbook.net/*",
                 "*://hogwartsnet.ru/*",
-                "*://snapetales.com/*"
+                "*://snapetales.com/*",
+                "*://samlib.ru/*",
+                "*://archiveofourown.org/*"
             ],
             "js": [
+                "js/vendor/jquery-3.3.1.min.js",
                 "js/common/utils.js",
                 "js/common/fanficRepository.js"
             ],
@@ -22,29 +25,37 @@
         {
             "matches": ["*://*.fanfiction.net/*"],
             "js": [
-                "js/fanfiction/content.js",
-                "js/vendor/jquery-3.3.1.min.js"
+                "js/fanfiction/content.js"
             ]
         },
         {
             "matches": ["*://*.ficbook.net/*"],
             "js": [
-                "js/ficbook/content.js",
-                "js/vendor/jquery-3.3.1.min.js"
+                "js/ficbook/content.js"
             ]
         },
         {
             "matches": ["*://hogwartsnet.ru/*"],
             "js": [
-                "js/hogwartsnet/content.js",
-                "js/vendor/jquery-3.3.1.min.js"
+                "js/hogwartsnet/content.js"
             ]
         },
         {
             "matches": ["*://snapetales.com/*"],
             "js": [
-                "js/snapetales/content.js",
-                "js/vendor/jquery-3.3.1.min.js"
+                "js/snapetales/content.js"
+            ]
+        },
+        {
+            "matches": ["*://samlib.ru/*"],
+            "js": [
+                "js/samlib/content.js"
+            ]
+        },
+        {
+            "matches": ["*://archiveofourown.org/*"],
+            "js": [
+                "js/archiveofourown/content.js"
             ]
         }
     ],

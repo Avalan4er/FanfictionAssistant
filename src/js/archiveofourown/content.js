@@ -1,4 +1,4 @@
-const siteId = 2
+const siteId = 7
 
 chrome.storage.local.get(['fanficsCache'], function(result) {
     if (result.fanficsCache == undefined) {
@@ -13,28 +13,27 @@ chrome.storage.local.get(['fanficsCache'], function(result) {
 })
 
 function injectToSearch(repository) {
-    $('a[title="Фанфик"]').each(function() {
-        let fanficLink = $(this).attr('href')
-
+    $('li.work').each(function() {
+        let fanficLink = $(this).attr('id')
         let siteFanficId = parseSiteFanficId(fanficLink)
         let fanficInfo = repository.findBySiteFanficId(siteId, siteFanficId)
-        let controlPanel = createControlPlate(fanficInfo).attr('style', 'float: right; margin: 0 0 5px 5px')
-
-        $(controlPanel).insertBefore($(this))
+        let controlPanel = $(createControlPlate(fanficInfo))
+            .attr('style', 'float: right; margin: 30px 0 5px 5px; z-index: 999; position: relative;')
+        $(this).prepend(controlPanel)
     })
 }
 
 function injectToFanficPage(repository) {
     let fanficLink = window.location.href
-    if (!fanficLink.includes('ffshowfic')) {
+    if (!fanficLink.includes('works')) {
         return
     }
 
     let siteFanficId = parseSiteFanficId(fanficLink)
     let fanficInfo = repository.findBySiteFanficId(siteId, siteFanficId)
-    let controlPlate = createControlPlate(fanficInfo).attr('style', 'text-align: left;')
+    let controlPlate = createControlPlate(fanficInfo).attr('style', 'float:right;')
 
-    $(controlPlate).insertAfter('form[name="fidochap"]')
+    $('dl.work.meta.group').prepend(controlPlate)
 }
 
 /**

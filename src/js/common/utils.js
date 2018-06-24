@@ -3,10 +3,10 @@ const sites = {
     1:  { url:'http://ficbook.net', format:'/readfic/{id}' },
     2:  { url:'http://hogwartsnet.ru', format:'/mfanf/ffshowfic.php?fid={id}' },
     3:  { url:'http://snapetales.com', format:'/index.php?fic_id={id}' },
-    4:  { url:'http://samlib.ru', format:'' },
+    4:  { url:'http://samlib.ru', format:'/{id}' },
     5:  { url:'https://www.fanfiction.net', format:'/s/{id}' },
-    6:  { url:'http://fan-book.ru', format:'' },
-    7:  { url:'https://archiveofourown.org', format:'' },
+    //6:  { url:'http://fan-book.ru', format:'' },
+    7:  { url:'https://archiveofourown.org', format:'/works/{id}' },
     8:  { url:'https://litnet.com', format:'' },
     9:  { url:'https://ranobelib.ru', format:'' },
     10: { url:'https://author.today', format:'' }
@@ -35,8 +35,8 @@ function createControlPlate(fanficDetails) {
         'data-site-fanfic-id': fanficDetails.siteFanficId
     }).append(createDownloadPlate(downloadLink))
 
-    let listOfAllMarks = $('<ul/>')
-        .addClass('list marks-all')
+    let listOfAllMarks = $('<div/>')
+        .addClass('marks-list marks-all')
     marks.forEach(mark => {
         let markPlate = createMarkPlate(mark, fanficDetails.marks.includes(mark))
         $(markPlate).click(markPlateClick)
@@ -44,8 +44,8 @@ function createControlPlate(fanficDetails) {
     })
     controlPlateContainer.append(listOfAllMarks)
 
-    let listOfSelectedMarks = $('<ul/>')
-        .addClass('list marks-selected')
+    let listOfSelectedMarks = $('<div/>')
+        .addClass('marks-list marks-selected')
     marks.forEach(mark => {
         let markPlate = createMarkPlate(mark, fanficDetails.marks.includes(mark))
         listOfSelectedMarks.append(markPlate)
@@ -96,7 +96,7 @@ function markPlateClick() {
  * @returns {Node} HTML элемент метки фанфика
  */
 function createMarkPlate(markId, selected) {
-    return $('<li/>', {
+    return $('<div/>', {
         'class': 'plate type' + markId + (selected ? ' selected' : ''),
         'id': markId
     })
@@ -108,7 +108,7 @@ function createMarkPlate(markId, selected) {
  * @returns {Node} HTML элемент Скачать фанфик
  */
 function createDownloadPlate(link) {
-    let $linkPlate = $('<div/>', { 'class': 'plate download' }).text('Добавить в...')
+    let $linkPlate = $('<div/>', { 'class': 'plate download' })
     $('<a>', {
         'href': link,
         'style': 'display: none;',

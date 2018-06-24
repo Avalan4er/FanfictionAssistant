@@ -27,7 +27,7 @@ function getFanficId(siteId, siteFanficId, succsessCallback, failCallback) {
         return
     }
 
-    let request = getFanficIdUrl.replace('{siteId}', siteId).replace('{siteFanficId}', siteFanficId)
+    let request = getFanficIdUrl.replace('{siteId}', siteId).replace('{siteFanficId}',  siteFanficId)
     executeRequest(request, succsessCallback, failCallback)
 }
 
