@@ -9,8 +9,8 @@
                 "https://www.fanfiction.net/*"
             ],
             "js": [
-                "scripts/utils.js",
-                "scripts/fanficRepository.js"
+                "js/common/utils.js",
+                "js/common/fanficRepository.js"
             ],
             "css": [
                 "css/plates.css"
@@ -19,18 +19,18 @@
         {
             "matches": ["https://www.fanfiction.net/*"],
             "js": [
-                "scripts/fanfiction.js",
-                "vendor/jquery-3.3.1.min.js"
+                "js/fanfiction/fanfiction.js",
+                "js/vendor/jquery-3.3.1.min.js"
             ]
         }
     ],
     "background": {
         "scripts": [
-            "vendor/jquery-3.3.1.min.js",
-            "scripts/fanficsApi.js",
-            "scripts/fanficRepository.js",
-            "scripts/backgroundStorage.js",
-            "scripts/backgroundMarks.js"
+            "js/vendor/jquery-3.3.1.min.js",
+            "js/common/fanficsApi.js",
+            "js/common/fanficRepository.js",
+            "js/background/storage.js",
+            "js/background/marks.js"
         ],
         "persistent": false
     },
