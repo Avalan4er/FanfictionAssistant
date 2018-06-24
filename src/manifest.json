@@ -6,7 +6,8 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.fanfiction.net/*"
+                "https://www.fanfiction.net/*",
+                "*://*.ficbook.net/*"
             ],
             "js": [
                 "js/common/utils.js",
@@ -17,9 +18,16 @@
             ]
         },
         {
-            "matches": ["https://www.fanfiction.net/*"],
+            "matches": ["*://*.fanfiction.net/*"],
             "js": [
                 "js/fanfiction/fanfiction.js",
+                "js/vendor/jquery-3.3.1.min.js"
+            ]
+        },
+        {
+            "matches": ["*://*.ficbook.net/*"],
+            "js": [
+                "js/ficbook/ficbook.js",
                 "js/vendor/jquery-3.3.1.min.js"
             ]
         }
