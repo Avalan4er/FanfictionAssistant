@@ -49,5 +49,8 @@
         "storage",
         "cookies",
         "*://*.fanfics.me/"
-    ]
+    ],
+    "icons": {
+        "128": "icon.png"
+    }
 }
