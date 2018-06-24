@@ -8,43 +8,30 @@ chrome.storage.local.get(['fanficsCache'], function(result) {
 
     injectToSearch(repository)
     injectToFanficPage(repository)
-
-    attachEventListeners()
 })
 
 function injectToSearch(repository) {
-    let articles = document.querySelectorAll('article.block')
-    for (let id in articles) {
-        let article = articles[id]
-        if (!(article instanceof Node)) {
-            continue
-        }
-
-        let table = document.createElement('table')
-        let tableBody = document.createElement('tbody')
-        table.appendChild(tableBody)
-        let row = document.createElement('tr')
-        tableBody.appendChild(row)
-        
-        let articleCell = document.createElement('td')
-        row.appendChild(articleCell)
-        while (article.childNodes.length > 0) {
-            articleCell.appendChild(article.childNodes[0])
-        }
-        
-        article.appendChild(table)
-
-        let controlPanelCell = document.createElement('td')
-        row.appendChild(controlPanelCell)
-
-        let fanficLink = article.querySelector('.visit-link').getAttribute('href')
+    $('article.block').each(function() {
+        let fanficLink = $(this).find('.visit-link').attr('href')
         let siteFanficId = parseSiteFanficId(fanficLink)
         let fanficInfo = repository.findBySiteFanficId(1, siteFanficId)
-        let controlPanel = createControlPlate(fanficInfo)
-        let height = Number.parseInt(table.clientHeight)-35
-        controlPanel.setAttribute('style', 'height: ' + height + 'px; margin: 35px -10px 0px 5px;')
-        controlPanelCell.appendChild(controlPanel)
-    }
+        let controlPanel = $('<td style="vertical-align: top;"/>').append(
+            createControlPlate(fanficInfo)
+                .attr('style', 'margin: 40px -10px 0 5px')
+        )
+
+        $(this).children().wrapAll('<td class="article-content"/>')
+        $(this).append(
+            $('<table style="width: 100%;"/>').append(
+                $('<tbody/>').append(
+                    $('<tr/>').append([
+                        $(this).find('.article-content'),
+                        controlPanel
+                    ])
+                )
+            )
+        )
+    })
 }
 
 function injectToFanficPage(repository) {
@@ -53,16 +40,11 @@ function injectToFanficPage(repository) {
         return
     }
 
-    let profile_top = document.querySelector('div.description')
-    if (profile_top == null || !(profile_top instanceof Node)) {
-        return
-    }
-
     let siteFanficId = parseSiteFanficId(fanficLink)
-    let fanficInfo = repository.findBySiteFanficId(5, siteFanficId)
+    let fanficInfo = repository.findBySiteFanficId(1, siteFanficId)
     let controlPlate = createControlPlate(fanficInfo)
-    controlPlate.setAttribute('style', 'height: ' + profile_top.clientHeight + 'px')
-    profile_top.appendChild(controlPlate)
+
+    $('div.description').append(controlPlate.attr('style', 'margin: 10px 0 0 -5px'))
 }
 
 /**

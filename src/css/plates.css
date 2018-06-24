@@ -1,58 +1,49 @@
-.control_panel_container {
-    position: static;
-    float: right;
-    width: 135px;
-    margin: 0 15px 0 0;
-    overflow: auto;
-}
-
 .control_panel {
     width: 135px;
-    position: absolute;
 }
 
-.control_panel:hover {
-    z-index: 9999;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+.control-panel-cell {
+    vertical-align: top;
 }
 
 .download {
     
 }
 
-.marks {
+.list {
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 100%;
+}
+
+.marks-all {
+    display: none;
+    position: absolute;
+    width: inherit;
+    z-index: 9999;
+}
+
+.control_panel:hover .marks-all {
+    display: block;
+}
+
+.marks-selected > .plate {
+    display: none;
+}
+
+.marks-selected > .selected {
+    display: block;
 }
 
 .plate {
     padding: 2px 8px 2px 8px;
-    margin-right: 4px;
     border-radius: 2px;
     color: #444;
     background-color: #fcfce8;
-    width: 100%;
 }
 
 .plate:hover {
   background-color: #efefdb;
-}
-
-.marks li {
-  display: none;
-  height: 0;
-}
-
-.marks li.selected {
-  display: block;
-  height: auto;
-}
-
-.control_panel:hover .marks li {
-  display: block;
-  height: auto;
 }
 
 .type1.selected {
