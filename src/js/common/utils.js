@@ -2,7 +2,7 @@
 const sites = {
     1:  { url:'http://ficbook.net', format:'/readfic/{id}' },
     2:  { url:'http://hogwartsnet.ru', format:'/mfanf/ffshowfic.php?fid={id}' },
-    3:  { url:'http://snapetales.com', format:'' },
+    3:  { url:'http://snapetales.com', format:'/index.php?fic_id={id}' },
     4:  { url:'http://samlib.ru', format:'' },
     5:  { url:'https://www.fanfiction.net', format:'/s/{id}' },
     6:  { url:'http://fan-book.ru', format:'' },

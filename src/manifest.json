@@ -8,7 +8,8 @@
             "matches": [
                 "*://*.fanfiction.net/*",
                 "*://*.ficbook.net/*",
-                "*://hogwartsnet.ru/*"
+                "*://hogwartsnet.ru/*",
+                "*://snapetales.com/*"
             ],
             "js": [
                 "js/common/utils.js",
@@ -36,6 +37,13 @@
             "matches": ["*://hogwartsnet.ru/*"],
             "js": [
                 "js/hogwartsnet/content.js",
+                "js/vendor/jquery-3.3.1.min.js"
+            ]
+        },
+        {
+            "matches": ["*://snapetales.com/*"],
+            "js": [
+                "js/snapetales/content.js",
                 "js/vendor/jquery-3.3.1.min.js"
             ]
         }
