@@ -16,10 +16,10 @@ function getUserFavorites(successCallback, failCallback) {
  * Запрашивает идентификатор фанфика в системе ФвФ по идентификатору сайта и идентификатору фанфика с сайта
  * @param {Number} siteId Идентификатор сайта
  * @param {String} siteFanficId Идентификатор фанфика на сайте
- * @param {Function} succsessCallback Метод вызывается при успешном запросе
+ * @param {Function} successCallback Метод вызывается при успешном запросе
  * @param {Function} failCallback Метод вызывается при ошибке запроса
  */
-function getFanficId(siteId, siteFanficId, succsessCallback, failCallback) {
+function getFanficId(siteId, siteFanficId, successCallback, failCallback) {
     if (siteId === undefined || siteFanficId === undefined) {
         if (failCallback !== undefined) {
             failCallback('Неверные аргументы')
@@ -28,7 +28,7 @@ function getFanficId(siteId, siteFanficId, succsessCallback, failCallback) {
     }
 
     let request = getFanficIdUrl.replace('{siteId}', siteId).replace('{siteFanficId}',  siteFanficId)
-    executeRequest(request, succsessCallback, failCallback)
+    executeRequest(request, successCallback, failCallback)
 }
 
 /**
@@ -76,6 +76,7 @@ function deleteFavoriteMark(fanficId, mark, successCallback, failCallback) {
  * @param {Function} failCallback Метод выполняется при ошибке запроса
  */
 function executeRequest(url, successCallback, failCallback) {
+    console.log('Отправляю запрос системе ФвФ: ', url)
     $.get({
         url: url,
         xhrFields: { withCredentials: true }

@@ -59,10 +59,10 @@ function createControlPlate(fanficDetails) {
 
 function markPlateClick() {
     let plate = $(this)
-    let parent = plate.closest('.control_panel')
-    let fanficId = parent.attr('data-fanfic-id')
-    let siteId = parent.attr('data-site-id')
-    let siteFanficId = parent.attr('data-site-fanfic-id')
+    let controlPanel = plate.closest('.control_panel')
+    let fanficId = controlPanel.attr('data-fanfic-id')
+    let siteId = controlPanel.attr('data-site-id')
+    let siteFanficId = controlPanel.attr('data-site-fanfic-id')
     if (fanficId === undefined || fanficId == '') {
         console.log('Не найден идентификатор фанфика')
         return
@@ -81,12 +81,12 @@ function markPlateClick() {
         if (response.status == 'success')
         {
             // При успешном выполнении запроса мы 100% узнаем ID фанфика в системе ФвФ
-            parent.attr('data-fanfic-id', response.fanficId)
+            controlPanel.attr('data-fanfic-id', response.fanficId)
             plate.toggleClass('selected')
-            parent.find('.marks-selected > .type'+markId).toggleClass('selected')
+            controlPanel.find('.marks-selected > .type'+markId).toggleClass('selected')
         }
         if (response.status == 'no_fic') {
-            parent.children()[0].click()  
+            controlPanel.find('.download').click()  
         }
     })
 }

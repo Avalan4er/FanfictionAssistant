@@ -14,22 +14,29 @@ chrome.runtime.onMessage.addListener(
         } else { // Id фанфика нужно запросить
             console.log('Идентификатор фанфика неизвестен, запрашиваю идентификатор фанфика')
             getFanficId(request.siteId, request.siteFanficId, function(data) {
-                if (data === undefined) {
+                // Пустые данные
+                if (data == null) {
                     console.log('Система ФвФ ответила пустыми данными')
                     sendResponse({status: 'error', message: 'Ошибка запроса идентификатора фанфика'})
-                    return
                 }
 
-                if (data.error !== undefined && data.error == 'no fic') {
+                // Идентификатор в наличии
+                else if (data.fic_id != null) {
+                    console.log('Идентификатор фанфика получен: ', data.fic_id)
+                    changeFavoriteMark(data.fic_id, request.mark, request.action, sendResponse)
+                    updateFanficMark(data.fic_id, request.siteId, request.siteFanficId, request.mark, request.action)
+                }
+
+                // Ошибка в наличии
+                else if (data.error == 'no fic') {
                     console.log('Фанфик не добавлен в систему ФвФ, оповещаю клиента о необходимости добавить фанфик')
                     sendResponse({status: 'no_fic', message: 'Фанфик не добавлен на сайт'})
-                    return
                 }
 
-                console.log('Идентификатор фанфика получен: ' + data.fic_id + '')
-                changeFavoriteMark(data.fic_id, request.mark, request.action, sendResponse)
-                updateFanficMark(data.fic_id, request.siteId, request.siteFanficId, request.mark, request.action)
-
+                // Непонятно что произошло
+                else {
+                    console.log('Не удалось распознать ответ от системы ФвФ.', data)
+                }
             }, function(error) {
                 sendResponse({status: 'error', message: error})
             })
