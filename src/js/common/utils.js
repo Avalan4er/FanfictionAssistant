@@ -33,10 +33,11 @@ function createControlPlate(fanficDetails) {
         'data-fanfic-id': fanficDetails.id!=-1?fanficDetails.id:'no_id',
         'data-site-id': fanficDetails.siteId,
         'data-site-fanfic-id': fanficDetails.siteFanficId
-    }).append(createDownloadPlate(downloadLink))
+    })
 
     let listOfAllMarks = $('<div/>')
         .addClass('marks-list marks-all')
+        .append(createDownloadPlate(downloadLink))
     marks.forEach(mark => {
         let markPlate = createMarkPlate(mark, fanficDetails.marks.includes(mark))
         $(markPlate).click(markPlateClick)
@@ -46,6 +47,7 @@ function createControlPlate(fanficDetails) {
 
     let listOfSelectedMarks = $('<div/>')
         .addClass('marks-list marks-selected')
+        .append(createDownloadPlate(downloadLink))
     marks.forEach(mark => {
         let markPlate = createMarkPlate(mark, fanficDetails.marks.includes(mark))
         listOfSelectedMarks.append(markPlate)
@@ -108,7 +110,7 @@ function createMarkPlate(markId, selected) {
  * @returns {Node} HTML элемент Скачать фанфик
  */
 function createDownloadPlate(link) {
-    let $linkPlate = $('<div/>', { 'class': 'plate download' })
+    let $linkPlate = $('<div/>', { 'class': 'plate download selected' })
     $('<a>', {
         'href': link,
         'style': 'display: none;',

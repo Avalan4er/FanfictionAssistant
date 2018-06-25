@@ -25,7 +25,7 @@ function injectToSearchResults(repository) {
         let controlPlate = createControlPlate(fanficInfo)
         controlPlate.attr('style', 'float: right;')
 
-        controlPlate.insertAfter($(this).children()[2])
+        controlPlate.insertAfter($(this).find('a').last())
     })
 }
 

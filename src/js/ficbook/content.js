@@ -19,7 +19,7 @@ function injectToSearch(repository) {
         let fanficInfo = repository.findBySiteFanficId(siteId, siteFanficId)
         let controlPanel = $('<td style="vertical-align: top;"/>').append(
             createControlPlate(fanficInfo)
-                .attr('style', 'margin: 40px -10px 0 5px')
+                .attr('style', 'margin: 40px -10px 0 5px; float: right;')
         )
 
         $(this).children().wrapAll('<td class="article-content"/>')
