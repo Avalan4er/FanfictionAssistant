@@ -1,7 +1,7 @@
 const siteId = 5
 
 chrome.storage.local.get(['fanficsCache'], function(result) {
-    if (result.fanficsCache == undefined) {
+    if (result.fanficsCache == undefined || Object.keys(result.fanficsCache.data).length <= 0) {
         console.error('Ошибка - нет загруженых фанфиков')
         return
     }

@@ -7,7 +7,7 @@ const sites = {
     5:  { url:'https://www.fanfiction.net', format:'/s/{id}' },
     //6:  { url:'http://fan-book.ru', format:'' },
     7:  { url:'https://archiveofourown.org', format:'/works/{id}' },
-    8:  { url:'https://litnet.com', format:'' },
+    //8:  { url:'https://litnet.com', format:'' },
     9:  { url:'https://ranobelib.ru', format:'' },
     10: { url:'https://author.today', format:'' }
 }

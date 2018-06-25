@@ -18,8 +18,12 @@ class FanficRepository {
     clearAllExeptForSite(siteId) {
         for (let fanficId in this.fanfics) {
             let fanfic = this.fanfics[fanficId]
-            if (fanfic.site_id != siteId) {
-                delete this.fanfics[fanficId]
+            if (fanfic != null && fanfic.site_id != siteId) {
+                try {
+                    delete this.fanfics[fanficId]
+                } catch(err) {
+                    console.err('Ошибка удаления фанфика из репозитория.', 'SiteId = ' + siteId, 'FanficId = ' + fanficId, 'FanficsCount = ' + Object.keys(this.fanfics).length, err)
+                }
             }
         }
     }
