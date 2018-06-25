@@ -98,7 +98,7 @@ function refreshCache() {
         let dto = {}
         dto[cacheStorageKey] = cache
         chrome.storage.local.set(dto, function() {
-            console.log('Кэш избранного обновлен в ' + timestamp)
+            console.log('Кэш избранного обновлен в ' + timestamp, ', загружено', Object.keys(data).length, 'фанфиков')
         })
     }, function(error) {
         if (error === 'bad auth') {

@@ -9,6 +9,7 @@ class FanficRepository {
      */
     constructor(fanfics){
         this.fanfics = fanfics
+        console.log('Создан репозиторий фанфиков. Кол-во записей: ', Object.keys(fanfics).length)
     }
 
     /**
@@ -26,6 +27,7 @@ class FanficRepository {
                 }
             }
         }
+        console.log('Репозиторий отчищен от лишних записей. Кол-во записей:', Object.keys(this.fanfics).length)
     }
 
     /**
