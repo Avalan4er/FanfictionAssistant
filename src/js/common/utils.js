@@ -86,7 +86,7 @@ function markPlateClick() {
             controlPanel.find('.marks-selected > .type'+markId).toggleClass('selected')
         }
         if (response.status == 'no_fic') {
-            controlPanel.find('.download').click()  
+            controlPanel.find('.download').first().click()  
         }
     })
 }
