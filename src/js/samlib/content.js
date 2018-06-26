@@ -13,45 +13,35 @@ chrome.storage.local.get(['fanficsCache'], function(result) {
 })
 
 function injectToSearch(repository) {
-    $('a[title="читать фик"]').each(function() {
+    $('dd').find('dl').each(function() {
         
-        let fanficLink = $(this).attr('href')
+        let siteFanficId = $(this).find('li').children('a').last().attr('href')
+        if (siteFanficId == null) return true;
+        siteFanficId = siteFanficId.substring(1, siteFanficId.length)
         
-        let siteFanficId = parseSiteFanficId(fanficLink)
         let fanficInfo = repository.findBySiteFanficId(siteId, siteFanficId)
         let controlPanel = createControlPlate(fanficInfo)
-        
-        $(this).closest('tr').next().append(
-            $('<td/>').attr('style', 'vertical-align: top;').append(controlPanel)
+
+        $(this).find('dt').first().wrap('<table><tbody><tr><td/>')
+        $(this).find('tr').prepend(
+            $('<td/>').attr('style', 'vertical-align: top').append(
+                controlPanel
+            )
         )
     })
 }
 
 function injectToFanficPage(repository) {
-    let td = $('select[name="BALL"]').closest('td')
+    let td = $('select[name="BALL"]').closest('td').first()
     if (td == null) {
         return
     }
 
-    let siteFanficId = window.location.pathname.substring(1, window.location.pathname.length - 1)
+    let siteFanficId = window.location.pathname.substring(1, window.location.pathname.length)
     let fanficInfo = repository.findBySiteFanficId(siteId, siteFanficId)
     let controlPlate = createControlPlate(fanficInfo)
 
-    td.prepend(
+    td.attr('valign', 'top').prepend(
         controlPlate.attr('style', 'text-align: left')
     )
-}
-
-/**
- * Получает идентификатор фанфика из ссылки на фанфик
- * @param {String} fanficLink Ссылка на фанфик
- * @returns {String} Идентификатор фанфика
- */
-function parseSiteFanficId(fanficLink) {
-    let matches = fanficLink.match('([0-9]{2,})')
-    if (matches == null || matches.length < 1) {
-        return ''
-    }
-
-    return matches[0]
 }
