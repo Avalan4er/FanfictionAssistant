@@ -8,10 +8,11 @@
             "matches": [
                 "*://*.fanfiction.net/*",
                 "*://*.ficbook.net/*",
-                "*://hogwartsnet.ru/*",
-                "*://snapetales.com/*",
-                "*://samlib.ru/*",
-                "*://archiveofourown.org/*"
+                "*://*.hogwartsnet.ru/*",
+                "*://*.snapetales.com/*",
+                "*://*.samlib.ru/*",
+                "*://*.archiveofourown.org/*",
+                "*://*.litnet.com/*"
             ],
             "js": [
                 "js/vendor/jquery-3.3.1.min.js",
@@ -56,6 +57,12 @@
             "matches": ["*://archiveofourown.org/*"],
             "js": [
                 "js/archiveofourown/content.js"
+            ]
+        },
+        {
+            "matches": [ "*://*.litnet.com/*"],
+            "js": [
+                "js/litnet/content.js"
             ]
         }
     ],
