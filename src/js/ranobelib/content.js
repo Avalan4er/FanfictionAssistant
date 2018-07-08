@@ -25,17 +25,3 @@ function injectToFanficPage(repository) {
         controlPlate.attr('style', 'float: left; margin: 10px 0px 0px 15px;')
     )
 }
-
-/**
- * Получает идентификатор фанфика из ссылки на фанфик
- * @param {String} fanficLink Ссылка на фанфик
- * @returns {String} Идентификатор фанфика
- */
-function parseSiteFanficId(fanficLink) {
-    let matches = fanficLink.match('([0-9]{2,})')
-    if (matches == null || matches.length < 1) {
-        return ''
-    }
-
-    return matches[0]
-}
