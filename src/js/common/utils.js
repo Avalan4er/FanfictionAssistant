@@ -8,8 +8,8 @@ const sites = {
     //6:  { url:'http://fan-book.ru', format:'' },
     7:  { url:'https://archiveofourown.org', format:'/works/{id}' },
     8:  { url:'https://litnet.com', format:'/book/{id}' },
-    9:  { url:'https://ranobelib.ru', format:'' },
-    10: { url:'https://author.today', format:'' }
+    9:  { url:'https://ranobelib.ru', format:'/{id}/' },
+    10: { url:'https://author.today', format:'/work/{id}' }
 }
 
 const marks = ['1', /*'2',*/ '3', '4', '5', '6', '7', '8', /*'9', 'a', 'b'*/]

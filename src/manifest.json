@@ -12,7 +12,9 @@
                 "*://*.snapetales.com/*",
                 "*://*.samlib.ru/*",
                 "*://*.archiveofourown.org/*",
-                "*://*.litnet.com/*"
+                "*://*.litnet.com/*",
+                "*://*.ranobelib.ru/*",
+                "*://*.author.today/*"
             ],
             "js": [
                 "js/vendor/jquery-3.3.1.min.js",
@@ -63,6 +65,18 @@
             "matches": [ "*://*.litnet.com/*"],
             "js": [
                 "js/litnet/content.js"
+            ]
+        },
+        {
+            "matches": [ "*://*.ranobelib.ru/*"],
+            "js": [
+                "js/ranobelib/content.js"
+            ]
+        },
+        {
+            "matches": [ "*://*.author.today/*"],
+            "js": [
+                "js/authortoday/content.js"
             ]
         }
     ],
